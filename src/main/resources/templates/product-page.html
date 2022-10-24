@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poké Mart - Product Page</title>
+</head>
+<body>
+    <h1 th:text="${user.username}"></h1>
+    <h2 th:text="'Cart Items: ' + ${carts.size}"></h2>
+    <div th:each="product: ${products}">
+        <img th:src="${product.imageUrl}">
+        <p th:text="${product.name}"></p>
+        <p th:text="${product.description}"></p>
+        <p th:text="${product.price}"></p>
+        <button>Add to Cart</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Poké Mart - Home Page</title>
+</head>
+<body>
+    <h1>Login as:</h1>
+    <form action="#" th:action="@{/login}" method="post">
+        <select class="form-control" name="user">
+            <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+        </select>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
