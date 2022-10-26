@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/carts")
@@ -29,41 +28,41 @@ public class CartViewController {
     private CartItemService cartItemService;
 
     @GetMapping
-    public String viewCartPage(@RequestParam("id") Long id, Model model) {
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
+    public String viewCartPage(Model model) {
+        User user = (User)model.getAttribute("user");
+//        model.addAttribute("user", user);
         model.addAttribute("carts", cartService.findByUserId(user.getId()));
         return "cart-page";
     }
 
-    @GetMapping("{userId}/checkOut/{id}")
-    public String addToCart(@PathVariable("userId") Long userId, @PathVariable(value = "id") Long cartId) {
-        User user = userService.findById(userId);
-        Cart cart = cartService.findById(cartId);
+    @GetMapping("/checkOut/{id}")
+    public String checkOut(@PathVariable("id") Long id, Model model) {
+        User user = (User)model.getAttribute("user");
+        Cart cart = cartService.findById(id);
         cart.checkOut();
         cartService.save(cart);
         Cart newCart = new Cart(user.getId());
         cartService.save(newCart);
-        return "redirect:/carts?id=" + userId;
+        return "redirect:/carts";
     }
 
-    @GetMapping("{userId}/plus/{id}")
-    public String addItemQuantity(@PathVariable("userId") Long userId, @PathVariable(value = "id") Long cartItemId) {
-        CartItem cartItem = cartItemService.findById(cartItemId);
+    @GetMapping("/add/{id}")
+    public String addItemQuantity(@PathVariable("id") Long id) {
+        CartItem cartItem = cartItemService.findById(id);
         cartItem.setQuantity(cartItem.getQuantity()+1);
         cartItemService.save(cartItem);
-        return "redirect:/carts?id=" + userId;
+        return "redirect:/carts";
     }
 
-    @GetMapping("{userId}/minus/{id}")
-    public String subtractItemQuantity(@PathVariable("userId") Long userId, @PathVariable(value = "id") Long cartItemId) {
-        CartItem cartItem = cartItemService.findById(cartItemId);
+    @GetMapping("/subtract/{id}")
+    public String subtractItemQuantity(@PathVariable("id") Long id) {
+        CartItem cartItem = cartItemService.findById(id);
         cartItem.setQuantity(cartItem.getQuantity()-1);
         if (cartItem.getQuantity() == 0) {
-            cartItemService.delete(cartItemId);
-            return "redirect:/carts?id=" + userId;
+            cartItemService.delete(id);
+            return "redirect:/carts";
         }
         cartItemService.save(cartItem);
-        return "redirect:/carts?id=" + userId;
+        return "redirect:/carts";
     }
 }

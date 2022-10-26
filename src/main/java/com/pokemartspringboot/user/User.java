@@ -17,6 +17,11 @@ public class User {
     private Long id;
     @Column(name = "user_name")
     private String username;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    private String password;
     @OneToMany
     @JoinColumn(name = "user_id")
     private Collection<Cart> carts = new HashSet<>();
@@ -56,11 +61,37 @@ public class User {
         return this.carts.size();
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", carts=" + carts +
                 '}';
     }
@@ -70,11 +101,11 @@ public class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return id.equals(user.id) && username.equals(user.username) && Objects.equals(carts, user.carts);
+        return id.equals(user.id) && username.equals(user.username) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && password.equals(user.password) && Objects.equals(carts, user.carts);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, carts);
+        return Objects.hash(id, username, firstName, lastName, password, carts);
     }
 }

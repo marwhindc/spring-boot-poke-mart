@@ -8,9 +8,9 @@
 <body>
     <nav>
         <ul>
-            <li><a th:href="@{/login}">Login</a></li>
-            <li><a th:href="@{/products?id={id}(id=${user.id})}">Products</a></li>
-            <li><a th:href="@{/carts?id={id}(id=${user.id})}">Carts</a></li>
+            <li><a th:href="@{/products}">Products</a></li>
+            <li><a th:href="@{/carts}">Carts</a></li>
+            <li><a th:href="@{/logout}">Logout</a></li>
         </ul>
     </nav>
     <h1 th:text="${user.username}"></h1>
@@ -34,9 +34,9 @@
                     <td th:text="'P' + ${cartItem.product.price}"></td>
                     <td>
                         <div class="quantity">
-                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/minus/${cartItem.id}'|">-</button>
+                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/subtract/${cartItem.id}'|">-</button>
                             <p th:text="${cartItem.quantity}"></p>
-                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/plus/${cartItem.id}'|">+</button>
+                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/add/${cartItem.id}'|">+</button>
                         </div>
                     </td>
                     <td th:text="'P' + ${cartItem.totalPrice}"></td>
@@ -47,7 +47,7 @@
                 </tr>
                 </tbody>
             </table>
-            <button th:disabled="${cart.totalQuantity == 0}" th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/checkOut/${cart.id}'|">Check Out</button>
+            <button th:disabled="${cart.totalQuantity == 0}" th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/checkOut/${cart.id}'|">Check Out</button>
         </div>
     </div>
 </body>

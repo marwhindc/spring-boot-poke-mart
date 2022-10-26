@@ -1,8 +1,8 @@
 -- user table
-INSERT INTO users (user_id, user_name)
+INSERT INTO users (user_id, user_name, first_name, last_name, password)
 VALUES
-    (1, 'Ash Ketchum')
-	(2, 'Misty Williams');
+    (1, 'aketchum', 'Ash', 'Ketchum', '$2y$10$k2P4yj2/y1aLx.5IRc5AH.XQRDkS0aKkGN2dUetIFEietFTRVrvVi'),
+	(2, 'mwilliams', 'Misty', 'Williams', '$2y$10$k2P4yj2/y1aLx.5IRc5AH.XQRDkS0aKkGN2dUetIFEietFTRVrvVi');
 
 -- products table
 INSERT INTO products (product_id, product_name, product_description, product_price, image_url)
@@ -15,12 +15,14 @@ VALUES
     (6, 'Ultra Ball', 'The Ultra Ball is a standard PokéBall you can obtain. It has a 2x Capture rate that increases the likelihood of capturing a Pokémon.', 1200, 'https://archives.bulbagarden.net/media/upload/a/a8/Dream_Ultra_Ball_Sprite.png');
 
 -- carts table (temp data)
-INSERT INTO carts (cart_id, user_id)
+INSERT INTO carts (cart_id, user_id, checked_out)
 VALUES
-    (1, 1);
+    (1, 1, false),
+    (2, 2, false);
 
 --cart_items table (temp data)
 INSERT INTO cart_items (cart_item_id, cart_id, product_id, quantity)
 VALUES
     (1, 1, 1, 5),
-	(2, 1, 2, 2);
+	(2, 1, 2, 2),
+	(3, 2, 1, 1);
