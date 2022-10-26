@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.product;
+package com.pokemartspringboot.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

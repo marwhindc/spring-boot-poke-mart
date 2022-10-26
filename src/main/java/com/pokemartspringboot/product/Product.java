@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.product;
+package com.pokemartspringboot.product;
 
 import javax.persistence.*;
 import java.math.BigDecimal;

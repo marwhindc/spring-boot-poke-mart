@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.user;
+package com.pokemartspringboot.user;
 
 import java.util.List;
 

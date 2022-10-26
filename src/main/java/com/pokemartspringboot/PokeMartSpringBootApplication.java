@@ -1,13 +1,13 @@
-package com.springbootpokemart.springbootpokemart;
+package com.pokemartspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootPokeMartApplication {
+public class PokeMartSpringBootApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringBootPokeMartApplication.class, args);
+		SpringApplication.run(PokeMartSpringBootApplication.class, args);
 	}
 
 }

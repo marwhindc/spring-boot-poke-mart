@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.cart;
+package com.pokemartspringboot.cart;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,6 +43,11 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Cart> findByUserId(Long id) {
-        return cartRepository.findByUserId(id);
+        return cartRepository.findByUserIdOrderByIdDesc(id);
+    }
+
+    @Override
+    public Cart findByUserIdAndCheckedOut(Long id, boolean isCheckedOut) {
+        return cartRepository.findByUserIdAndCheckedOut(id, isCheckedOut);
     }
 }

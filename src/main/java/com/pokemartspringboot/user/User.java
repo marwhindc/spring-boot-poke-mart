@@ -1,6 +1,6 @@
-package com.springbootpokemart.springbootpokemart.user;
+package com.pokemartspringboot.user;
 
-import com.springbootpokemart.springbootpokemart.cart.Cart;
+import com.pokemartspringboot.cart.Cart;
 
 import javax.persistence.*;
 import java.util.Collection;

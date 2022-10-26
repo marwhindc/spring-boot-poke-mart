@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.cartitem;
+package com.pokemartspringboot.cartitem;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

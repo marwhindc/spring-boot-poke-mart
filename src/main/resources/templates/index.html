@@ -6,11 +6,14 @@
 </head>
 <body>
     <h1>Login as:</h1>
-    <form action="#" th:action="@{/login}" method="post">
-        <select class="form-control" name="user">
-            <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.username}"></option>
-        </select>
-        <button type="submit">Login</button>
-    </form>
+<!--    <form action="#" th:action="@{/login}" method="post">-->
+<!--        <select class="form-control" name="user">-->
+<!--            <option th:each="user: ${users}" th:value="${user.id}" th:text="${user.username}"></option>-->
+<!--        </select>-->
+<!--        <button type="submit">Login</button>-->
+<!--    </form>-->
+    <ul th:each="user : ${users}">
+        <li><a th:text="${user.username}" th:href="@{/products?id={id}(id=${user.id})}"></a></li>
+    </ul>
 </body>
 </html>

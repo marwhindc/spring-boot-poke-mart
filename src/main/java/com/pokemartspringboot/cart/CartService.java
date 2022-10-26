@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.cart;
+package com.pokemartspringboot.cart;
 
 import java.util.List;
 
@@ -9,4 +9,5 @@ public interface CartService {
     Cart findById(Long id);
     void delete(Long id);
     List<Cart> findByUserId(Long id);
+    Cart findByUserIdAndCheckedOut(Long id, boolean isCheckedOut);
 }

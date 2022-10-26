@@ -3,16 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Poké Mart - Product Page</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
 </head>
 <body>
+    <nav>
+        <ul>
+            <li><a th:href="@{/login}">Login</a></li>
+            <li><a th:href="@{/products?id={id}(id=${user.id})}">Products</a></li>
+            <li><a th:href="@{/carts?id={id}(id=${user.id})}">Carts</a></li>
+        </ul>
+    </nav>
     <h1 th:text="${user.username}"></h1>
-    <h2 th:text="'Cart Items: ' + ${carts.size}"></h2>
-    <div th:each="product: ${products}">
-        <img th:src="${product.imageUrl}">
-        <p th:text="${product.name}"></p>
-        <p th:text="${product.description}"></p>
-        <p th:text="${product.price}"></p>
-        <button>Add to Cart</button>
+    <h2 th:text="'Cart Items: ' + ${cart.totalQuantity}"></h2>
+    <div class="product-list">
+        <div th:each="product: ${products}" class="product-container">
+            <img th:src="${product.imageUrl}">
+            <p th:text="${product.name}"></p>
+            <p th:text="'P' + ${product.price}"></p>
+            <button th:onclick="|window.location.href='products/${user.id}/addToCart/${product.id}'|">Add to Cart</button>
+        </div>
     </div>
 </body>
 </html>

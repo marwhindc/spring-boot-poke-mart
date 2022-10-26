@@ -1,8 +1,9 @@
-package com.springbootpokemart.springbootpokemart.cart;
+package com.pokemartspringboot.cart;
 
-import com.springbootpokemart.springbootpokemart.cartitem.CartItem;
+import com.pokemartspringboot.cartitem.CartItem;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,6 +21,8 @@ public class Cart {
     @OneToMany
     @JoinColumn(name = "cart_id")
     private Collection<CartItem> cartItems = new HashSet<>();
+    @Column(name = "checked_out")
+    private boolean checkedOut = false;
 
     public Cart() {
     }
@@ -52,8 +55,28 @@ public class Cart {
         this.cartItems = cartItems;
     }
 
-    public Integer getSize() {
-        return this.cartItems.size();
+    public Integer getTotalQuantity() {
+        int total = 0;
+        for (CartItem cartItem : cartItems) {
+            total += cartItem.getQuantity();
+        }
+        return total;
+    }
+
+    public BigDecimal getTotalCartPrice() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (CartItem cartItem : cartItems){
+            total = total.add(cartItem.getTotalPrice());
+        }
+        return total;
+    }
+
+    public boolean isCheckedOut() {
+        return checkedOut;
+    }
+
+    public void checkOut() {
+        this.checkedOut = true;
     }
 
     @Override
@@ -62,6 +85,7 @@ public class Cart {
                 "id=" + id +
                 ", userId=" + userId +
                 ", cartItems=" + cartItems +
+                ", checkedOut=" + checkedOut +
                 '}';
     }
 
@@ -70,11 +94,11 @@ public class Cart {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cart cart = (Cart) o;
-        return id.equals(cart.id) && userId.equals(cart.userId) && Objects.equals(cartItems, cart.cartItems);
+        return checkedOut == cart.checkedOut && id.equals(cart.id) && userId.equals(cart.userId) && Objects.equals(cartItems, cart.cartItems);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, cartItems);
+        return Objects.hash(id, userId, cartItems, checkedOut);
     }
 }

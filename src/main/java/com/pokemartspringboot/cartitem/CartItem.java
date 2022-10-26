@@ -1,8 +1,9 @@
-package com.springbootpokemart.springbootpokemart.cartitem;
+package com.pokemartspringboot.cartitem;
 
-import com.springbootpokemart.springbootpokemart.product.Product;
+import com.pokemartspringboot.product.Product;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -59,6 +60,10 @@ public class CartItem {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public BigDecimal getTotalPrice() {
+        return BigDecimal.valueOf(this.quantity).multiply(this.product.getPrice());
     }
 
     @Override

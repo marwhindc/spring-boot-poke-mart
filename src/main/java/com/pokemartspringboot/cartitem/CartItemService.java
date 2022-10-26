@@ -1,4 +1,4 @@
-package com.springbootpokemart.springbootpokemart.cartitem;
+package com.pokemartspringboot.cartitem;
 
 import java.util.List;
 
