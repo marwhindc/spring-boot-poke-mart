@@ -20,13 +20,4 @@ public class HomeController {
         return "index";
     }
 
-//    @PostMapping
-//    public String login(@RequestParam("user") Long id, RedirectAttributes redirectAttributes, Model model) {
-//        User user = userService.findById(id);
-//        redirectAttributes.addFlashAttribute("user", user);
-//        return "redirect:/products";
-//    }
-
-
-
 }

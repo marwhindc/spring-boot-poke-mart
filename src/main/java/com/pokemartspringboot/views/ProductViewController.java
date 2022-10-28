@@ -38,22 +38,19 @@ public class ProductViewController {
 
     @GetMapping
     public String viewProductPage(Model model) {
-//        User user = userService.findById(id);
         User user = (User)model.getAttribute("user");
-        Cart cart = cartService.findByUserIdAndCheckedOut(user.getId(),false);
-//        model.addAttribute("user", user);
+        Cart activeCart = cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0);
         model.addAttribute("products", productService.findAll());
-        model.addAttribute("cart", cart);
+        model.addAttribute("cart", activeCart);
         return "product-page";
     }
 
     @GetMapping("/addToCart/{id}")
     public String addToCart(@PathVariable("id") Long id, Model model) {
-
-//        User user = userService.findById(userId);
         User user = (User)model.getAttribute("user");
-        Cart cart = cartService.findByUserIdAndCheckedOut(user.getId(),false);
-        Collection<CartItem> cartItems = cart.getCartItems();
+        Cart activeCart = cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0);
+        model.addAttribute("products", productService.findAll());
+        Collection<CartItem> cartItems = activeCart.getCartItems();
         for(CartItem cartItem : cartItems) {
             if (cartItem.getProduct().getId().equals(id)) {
                 cartItem.setQuantity(cartItem.getQuantity()+1);
@@ -61,7 +58,7 @@ public class ProductViewController {
                 return "redirect:/products";
             }
         }
-        CartItem newCartItem = new CartItem(cart.getId(), 1, productService.findById(id));
+        CartItem newCartItem = new CartItem(activeCart.getId(), 1, productService.findById(id));
         cartItemService.save(newCartItem);
         return "redirect:/products";
     }

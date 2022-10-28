@@ -30,8 +30,8 @@ public class CartViewController {
     @GetMapping
     public String viewCartPage(Model model) {
         User user = (User)model.getAttribute("user");
-//        model.addAttribute("user", user);
-        model.addAttribute("carts", cartService.findByUserId(user.getId()));
+        Cart activeCart = cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0);
+        model.addAttribute("cart", activeCart);
         return "cart-page";
     }
 
@@ -64,5 +64,13 @@ public class CartViewController {
         }
         cartItemService.save(cartItem);
         return "redirect:/carts";
+    }
+
+    @GetMapping("/purchase")
+    public String viewPurchasePage(Model model) {
+        User user = (User)model.getAttribute("user");
+        model.addAttribute("activeCart", cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0));
+        model.addAttribute("carts", cartService.findByUserIdAndCheckedOut(user.getId(),true));
+        return "purchase-page";
     }
 }

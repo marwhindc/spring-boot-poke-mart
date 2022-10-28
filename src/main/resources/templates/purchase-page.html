@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mart - Products</title>
+    <title>Mart - Purchase</title>
     <link th:href="@{/style.css}" rel="stylesheet" />
 </head>
-
 <body>
 <header>
     <div class="header-left">
@@ -19,26 +18,32 @@
         <a th:href="@{/carts/purchase}">Purchases</a>
         <div class="shopping-cart-icon-container">
             <a th:href="@{/carts}"><input type="image" th:src="@{/shopping-cart-icon.png}"></a>
-            <div class="shopping-cart-badge" th:text="${cart.totalQuantity}"></div>
+            <div class="shopping-cart-badge" th:text="${activeCart.totalQuantity}"></div>
         </div>
         <a th:href="@{/logout}">Logout</a>
     </div>
 </header>
+
 <main>
     <div class="container">
-        <h2 class="container-title">Featured Items</h2>
-        <div class="product-items">
-            <div class="product-item-card" th:each="product: ${products}">
-                <img class="product-icon"
-                     th:src="${product.imageUrl}" height="63"
-                     width="63">
-                <p class="product-name" th:text="${product.name}"></p>
-                <p class="product-price" th:text="'₽' + ${product.price}"></p>
-                <button class="submit-btn" th:onclick="|window.location.href='products/addToCart/${product.id}'|">ADD TO CART</button>
+        <h2 class="container-title">Previous Purchases</h2>
+        <div class="co-cart-list">
+            <div class="co-cart-container" th:each="cart : ${carts}">
+                <div class="co-cart-item" th:each="cartItem : ${cart.cartItems}">
+                    <div class="co-cart-item-product">
+                        <img th:src="${cartItem.product.imageUrl}"
+                             height="30" width="30">
+                        <p th:text="${cartItem.product.name}"></p>
+                    </div>
+                    <p th:text="${cartItem.quantity}"></p>
+                    <p th:text="'₽' + ${cartItem.totalPrice}"></p>
+                </div>
+                <p class="co-cart-total" th:text="'Order Total: ₽' + ${cart.totalCartPrice}"></p>
             </div>
         </div>
     </div>
 </main>
+
 <footer>
     <p>© Copyright 2022. All rights are reserved.</p>
 </footer>
