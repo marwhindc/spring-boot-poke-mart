@@ -30,6 +30,13 @@ public class CartItem {
         this.product = product;
     }
 
+    public CartItem(Long id, Long cartId, Integer quantity, Product product) {
+        this.id = id;
+        this.cartId = cartId;
+        this.quantity = quantity;
+        this.product = product;
+    }
+
     public Long getId() {
         return id;
     }

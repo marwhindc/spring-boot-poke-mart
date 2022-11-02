@@ -5,7 +5,7 @@ import java.util.List;
 public interface CartItemService {
 
     List<CartItem> findAll();
-    void save(CartItem cartItem);
+    CartItem save(CartItem cartItem);
     CartItem findById(Long id);
-    void delete(Long id);
+    CartItem delete(Long id);
 }

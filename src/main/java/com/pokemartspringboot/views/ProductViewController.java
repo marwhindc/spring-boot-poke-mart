@@ -49,7 +49,7 @@ public class ProductViewController {
     public String addToCart(@PathVariable("id") Long id, Model model) {
         User user = (User)model.getAttribute("user");
         Cart activeCart = cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0);
-        model.addAttribute("products", productService.findAll());
+//        model.addAttribute("products", productService.findAll());
         Collection<CartItem> cartItems = activeCart.getCartItems();
         for(CartItem cartItem : cartItems) {
             if (cartItem.getProduct().getId().equals(id)) {

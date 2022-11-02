@@ -12,32 +12,35 @@ public class CartItemServiceImpl implements CartItemService {
     private CartItemRepository cartItemRepository;
 
     @Autowired
-    CartItemServiceImpl(CartItemRepository cartItemRepository) {
+    public CartItemServiceImpl(CartItemRepository cartItemRepository) {
         this.cartItemRepository = cartItemRepository;
     }
 
     @Override
     public List<CartItem> findAll() {
-        return cartItemRepository.findAll();
+        return cartItemRepository.findAllByOrderByIdAsc();
     }
 
     @Override
-    public void save(CartItem cartItem) {
-        cartItemRepository.save(cartItem);
+    public CartItem save(CartItem cartItem) {
+        return cartItemRepository.save(cartItem);
     }
 
     @Override
     public CartItem findById(Long id) {
-        Optional<CartItem> optional = cartItemRepository.findById(id);
-        CartItem cartItem = null;
-        if (optional.isPresent()) {
-            cartItem = optional.get();
-        } else throw new RuntimeException("Cart Item not found for id: " + id);
-        return cartItem;
+        Optional<CartItem> cartItem = cartItemRepository.findById(id);
+//        CartItem cartItem = null;
+//        if (optional.isPresent()) {
+//            cartItem = optional.get();
+//        } else throw new RuntimeException("Cart Item not found for id: " + id);
+//        return cartItem;
+        return cartItem.orElseThrow(() -> new CartItemNotFoundException(id));
     }
 
     @Override
-    public void delete(Long id) {
+    public CartItem delete(Long id) {
         cartItemRepository.deleteById(id);
+        Optional<CartItem> cartItem = cartItemRepository.findById(id);
+        return cartItem.orElseThrow(() -> new CartItemNotFoundException(id));
     }
 }
