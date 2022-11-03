@@ -2,53 +2,67 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Poké Mart - Cart Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mart - Carts</title>
     <link th:href="@{/style.css}" rel="stylesheet" />
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a th:href="@{/login}">Login</a></li>
-            <li><a th:href="@{/products?id={id}(id=${user.id})}">Products</a></li>
-            <li><a th:href="@{/carts?id={id}(id=${user.id})}">Carts</a></li>
-        </ul>
-    </nav>
-    <h1 th:text="${user.username}"></h1>
-    <div class="cart-list">
-        <div class="cart-container" th:each="cart: ${carts}">
-            <p th:text="'Cart ID: ' + ${cart.id}"></p>
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="cartItem : ${cart.cartItems}">
-                    <td><img th:src="${cartItem.product.imageUrl}" height="30" width="30"></td>
-                    <td th:text="${cartItem.product.name}"></td>
-                    <td th:text="'P' + ${cartItem.product.price}"></td>
-                    <td>
-                        <div class="quantity">
-                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/minus/${cartItem.id}'|">-</button>
-                            <p th:text="${cartItem.quantity}"></p>
-                            <button th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/plus/${cartItem.id}'|">+</button>
-                        </div>
-                    </td>
-                    <td th:text="'P' + ${cartItem.totalPrice}"></td>
-                </tr>
-                <tr>
-                    <td colspan="5">Total Amount: </td>
-                    <td th:text="'P' + ${cart.totalCartPrice}"></td>
-                </tr>
-                </tbody>
-            </table>
-            <button th:disabled="${cart.totalQuantity == 0}" th:hidden="${cart.checkedOut == true}" th:onclick="|window.location.href='carts/${user.id}/checkOut/${cart.id}'|">Check Out</button>
+    <header>
+        <div class="header-left">
+            <a th:href="@{/products}">
+                <input type="image" th:src="@{/pokemartlogo.png}" width="290" height="106">
+            </a>
         </div>
-    </div>
+        <div class="header-right">
+            <p class="loggedin-user">Hi, <span th:text="${user.username}"></span>!</p>
+            <a th:href="@{/carts/purchase}">Purchases</a>
+            <div class="shopping-cart-icon-container">
+                <a th:href="@{/carts}"><input type="image" th:src="@{/shopping-cart-icon.png}"></a>
+                <div class="shopping-cart-badge" th:text="${cart.totalQuantity}"></div>
+            </div>
+            <a th:href="@{/logout}">Logout</a>
+        </div>
+    </header>
+    <main>
+        <h2 class="container-title" th:hidden="${!(cart.totalQuantity == 0)}">No items in your cart yet!</h2>
+        <h2 class="container-title" th:hidden="${cart.totalQuantity == 0}">Shopping Cart</h2>
+        <div class="container" th:hidden="${cart.totalQuantity == 0}">
+            <div class="shopping-cart-header">
+                <div class="product-heading">Product</div>
+                <div class="unit-price-heading">Unit Price</div>
+                <div class="quantity-heading">Quantity</div>
+                <div class="total-price-heading">Total Price</div>
+            </div>
+            <div class="cart-items">
+                <div class="cart-item-card" th:each="cartItem : ${cart.cartItems}">
+                    <div class="cart-item-product">
+                        <img class="cart-item-product-img"
+                             th:src="${cartItem.product.imageUrl}"
+                             height="30" width="30">
+                        <p class="cart-item-product-name" th:text="${cartItem.product.name}"></p>
+                    </div>
+                    <p class="cart-item-price" th:text="'₽' + ${cartItem.product.price}"></p>
+                    <div class="cart-item-quantity">
+                        <input type="image" th:onclick="|window.location.href='carts/subtract/${cartItem.id}'|" th:src="@{/minus.png}" height="16" width="16">
+                        <p th:text="${cartItem.quantity}"></p>
+                        <input type="image" th:onclick="|window.location.href='carts/add/${cartItem.id}'|" th:src="@{/plus.png}" height="16" width="16">
+                    </div>
+                    <p class="cart-item-total-price" th:text="'₽' + ${cartItem.totalPrice}"></p>
+                </div>
+            </div>
+            <div class="shopping-cart-checkout">
+                <div class="subtotal-price-container">
+                    <p>Total:</p>
+                    <p class="subtotal-price"><span th:text="'₽' + ${cart.totalCartPrice}"></span></p>
+                </div>
+                <div class="checkout-btn-container">
+                    <button th:onclick="|window.location.href='carts/checkOut/${cart.id}'|" class="submit-btn checkout-btn">CHECKOUT</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© Copyright 2022. All rights are reserved.</p>
+    </footer>
 </body>
 </html>

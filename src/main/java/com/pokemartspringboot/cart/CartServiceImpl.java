@@ -22,8 +22,9 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void save(Cart cart) {
+    public Cart save(Cart cart) {
         cartRepository.save(cart);
+        return cart;
     }
 
     @Override
@@ -47,7 +48,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart findByUserIdAndCheckedOut(Long id, boolean isCheckedOut) {
-        return cartRepository.findByUserIdAndCheckedOut(id, isCheckedOut);
+    public List<Cart> findByUserIdAndCheckedOut(Long id, boolean isCheckedOut) {
+        return cartRepository.findByUserIdAndCheckedOutOrderByIdDesc(id, isCheckedOut);
     }
 }
