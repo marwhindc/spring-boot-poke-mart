@@ -38,9 +38,7 @@ public class CartItemServiceImpl implements CartItemService {
     }
 
     @Override
-    public CartItem delete(Long id) {
+    public void delete(Long id) {
         cartItemRepository.deleteById(id);
-        Optional<CartItem> cartItem = cartItemRepository.findById(id);
-        return cartItem.orElseThrow(() -> new CartItemNotFoundException(id));
     }
 }

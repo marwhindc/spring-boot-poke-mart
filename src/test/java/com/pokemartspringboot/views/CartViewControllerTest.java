@@ -167,9 +167,7 @@ class CartViewControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/carts"));
 
-        doReturn(cartItem).when(cartItemService).delete(1L);
-        CartItem deletedCartItem = cartItemService.delete(1L);
-        assertEquals(cartItem, deletedCartItem);
+        then(cartItemService).should().delete(1L);
     }
 
 

@@ -7,5 +7,5 @@ public interface CartItemService {
     List<CartItem> findAll();
     CartItem save(CartItem cartItem);
     CartItem findById(Long id);
-    CartItem delete(Long id);
+    void delete(Long id);
 }
