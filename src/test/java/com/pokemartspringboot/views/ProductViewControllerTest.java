@@ -103,6 +103,7 @@ class ProductViewControllerTest {
     public void addToCart_invoke_save_and_add_quantity() throws Exception {
 
         given(cartService.findByUserIdAndCheckedOut(user.getId(), false)).willReturn(List.of(cart));
+        given(cartItemService.findByCartIdAndProductId(cart.getId(), 1L)).willReturn(cartItem);
 
         mockMvc.perform(get("/products/addToCart/{id}", 1L).flashAttr("user", user))
                 .andExpect(status().is3xxRedirection())

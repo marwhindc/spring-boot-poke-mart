@@ -14,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collection;
-
 @Controller
 @ControllerAdvice
 @RequestMapping("/products")
@@ -50,14 +48,20 @@ public class ProductViewController {
         User user = (User)model.getAttribute("user");
         Cart activeCart = cartService.findByUserIdAndCheckedOut(user.getId(),false).get(0);
 //        model.addAttribute("products", productService.findAll());
-        Collection<CartItem> cartItems = activeCart.getCartItems();
-        for(CartItem cartItem : cartItems) {
-            if (cartItem.getProduct().getId().equals(id)) {
-                cartItem.setQuantity(cartItem.getQuantity()+1);
-                cartItemService.save(cartItem);
-                return "redirect:/products";
-            }
+//        Collection<CartItem> cartItems = activeCart.getCartItems();
+//        for(CartItem cartItem : cartItems) {
+//            if (cartItem.getProduct().getId().equals(id)) {
+//                cartItem.setQuantity(cartItem.getQuantity()+1);
+//
+//            }
+//        }
+        CartItem cartItem = cartItemService.findByCartIdAndProductId(activeCart.getId(), id);
+        if (cartItem != null) {
+            cartItem.setQuantity(cartItem.getQuantity()+1);
+            cartItemService.save(cartItem);
+            return "redirect:/products";
         }
+
         CartItem newCartItem = new CartItem(activeCart.getId(), 1, productService.findById(id));
         cartItemService.save(newCartItem);
         return "redirect:/products";

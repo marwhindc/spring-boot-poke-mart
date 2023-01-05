@@ -8,4 +8,5 @@ public interface CartItemService {
     CartItem save(CartItem cartItem);
     CartItem findById(Long id);
     void delete(Long id);
+    CartItem findByCartIdAndProductId(Long cartId, Long productId);
 }
