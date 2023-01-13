@@ -37,12 +37,13 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 30px;
 }
 
 .header-right {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 50px;
     font-size: 18px;
 }
@@ -279,7 +280,7 @@ footer {
 .co-cart-item {
     display: flex;
     align-items: center;
-
+    gap: 10px;
 }
 
 .co-cart-item>* {
@@ -293,4 +294,42 @@ footer {
     column-gap: 25px;
     margin-left: 20px;
     text-align: left;
+}
+
+@media only screen and (max-width: 1080px) {
+    header {
+        padding: 20px;
+    }
+
+    .header-right {
+        gap: 18px;
+    }
+
+    body {
+        width: 80%;
+    }
+
+    .co-cart-container {
+        padding: 20px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    header {
+        padding: 20px;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    body {
+        width: 90%;
+    }
+
+    .co-cart-container {
+        padding: 20px;
+    }
+
+    .co-cart-item-product {
+            margin-left: 0;
+        }
 }
