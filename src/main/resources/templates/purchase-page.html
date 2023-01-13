@@ -10,7 +10,7 @@
 <header>
     <div class="header-left">
         <a th:href="@{/products}">
-            <input type="image" th:src="@{/pokemartlogo.png}" width="290" height="106">
+            <input type="image" th:src="@{/pokemart-logo.png}" width="290" height="106">
         </a>
     </div>
     <div class="header-right">
@@ -35,7 +35,7 @@
                              height="30" width="30">
                         <p th:text="${cartItem.product.name}"></p>
                     </div>
-                    <p th:text="${cartItem.quantity}"></p>
+                    <p th:text="'x ' + ${cartItem.quantity}"></p>
                     <p th:text="'₽' + ${cartItem.totalPrice}"></p>
                 </div>
                 <p class="co-cart-total" th:text="'Order Total: ₽' + ${cart.totalCartPrice}"></p>
@@ -45,7 +45,7 @@
 </main>
 
 <footer>
-    <p>© Copyright 2022. All rights are reserved.</p>
+    <p>© Copyright 2023. All rights are reserved.</p>
 </footer>
 </body>
 </html>
