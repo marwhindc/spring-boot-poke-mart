@@ -1,5 +1,6 @@
-package com.pokemartspringboot.cart;
+package com.pokemartspringboot.models;
 
+import com.pokemartspringboot.cart.Cart;
 import com.pokemartspringboot.cartitem.CartItem;
 import com.pokemartspringboot.product.Product;
 import org.junit.jupiter.api.BeforeEach;

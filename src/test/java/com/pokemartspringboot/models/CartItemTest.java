@@ -1,5 +1,6 @@
-package com.pokemartspringboot.cartitem;
+package com.pokemartspringboot.models;
 
+import com.pokemartspringboot.cartitem.CartItem;
 import com.pokemartspringboot.product.Product;
 import org.junit.jupiter.api.Test;
 
