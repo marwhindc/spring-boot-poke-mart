@@ -6,7 +6,7 @@ import com.pokemartspringboot.cartitem.CartItem;
 import com.pokemartspringboot.cartitem.CartItemService;
 import com.pokemartspringboot.product.Product;
 import com.pokemartspringboot.product.ProductService;
-import com.pokemartspringboot.user.MyUserDetailsService;
+import com.pokemartspringboot.user.UserDetailsServiceImpl;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserService;
 import org.junit.jupiter.api.BeforeEach;
@@ -44,7 +44,7 @@ class CartViewControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private MyUserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     private User user;
     private Cart cart;
