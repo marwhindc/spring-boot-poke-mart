@@ -1,19 +1,24 @@
 package com.pokemartspringboot.cart;
 
+import com.pokemartspringboot.user.User;
+import com.pokemartspringboot.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
 
-    private CartRepository cartRepository;
+    private final CartRepository cartRepository;
+    private final UserService userService;
 
     @Autowired
-    CartServiceImpl(CartRepository cartRepository) {
+    CartServiceImpl(CartRepository cartRepository, UserService userService) {
         this.cartRepository = cartRepository;
+        this.userService = userService;
     }
 
     @Override
@@ -23,32 +28,37 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart save(Cart cart) {
-        cartRepository.save(cart);
-        return cart;
+        return cartRepository.save(cart);
     }
 
     @Override
     public Cart findById(Long id) {
-        Optional<Cart> optional = cartRepository.findById(id);
-        Cart cart = null;
-        if (optional.isPresent()) {
-            cart = optional.get();
-        } else throw new RuntimeException("Cart not found for id: " + id);
-        return cart;
+        return cartRepository.findById(id).orElseThrow(() -> new CartNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        cartRepository.deleteById(id);
+        Cart cart = findById(id);
+        if (cart != null) {
+            cartRepository.delete(cart);
+        }
     }
 
     @Override
     public List<Cart> findByUserId(Long id) {
-        return cartRepository.findByUserIdOrderByIdDesc(id);
+        User user = userService.findById(id);
+        if (user != null) {
+            return cartRepository.findByUserIdOrderByIdDesc(id);
+        }
+        return new ArrayList<>();
     }
 
     @Override
     public List<Cart> findByUserIdAndCheckedOut(Long id, boolean isCheckedOut) {
-        return cartRepository.findByUserIdAndCheckedOutOrderByIdDesc(id, isCheckedOut);
+        User user = userService.findById(id);
+        if (user != null) {
+            return cartRepository.findByUserIdAndCheckedOutOrderByIdDesc(id, isCheckedOut);
+        }
+        return new ArrayList<>();
     }
 }

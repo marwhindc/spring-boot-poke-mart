@@ -4,12 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
     ProductServiceImpl (ProductRepository productRepository) {
@@ -22,22 +21,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void save(Product product) {
-        productRepository.save(product);
+    public Product save(Product product) {
+        return productRepository.save(product);
     }
 
     @Override
     public Product findById(Long id) {
-        Optional<Product> optional = productRepository.findById(id);
-        Product product = null;
-        if (optional.isPresent()) {
-            product = optional.get();
-        } else throw new RuntimeException("Product not found for id: " + id);
-        return product;
+        return productRepository.findById(id).orElseThrow(() -> new ProductNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        productRepository.deleteById(id);
+        Product product = findById(id);
+        if (product != null) {
+            productRepository.delete(product);
+        }
     }
 }

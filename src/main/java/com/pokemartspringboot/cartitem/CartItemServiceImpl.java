@@ -1,19 +1,26 @@
 package com.pokemartspringboot.cartitem;
 
+import com.pokemartspringboot.cart.Cart;
+import com.pokemartspringboot.cart.CartService;
+import com.pokemartspringboot.product.Product;
+import com.pokemartspringboot.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartItemServiceImpl implements CartItemService {
 
-    private CartItemRepository cartItemRepository;
+    private final CartItemRepository cartItemRepository;
+    private final CartService cartService;
+    private final ProductService productService;
 
     @Autowired
-    public CartItemServiceImpl(CartItemRepository cartItemRepository) {
+    public CartItemServiceImpl(CartItemRepository cartItemRepository, CartService cartService, ProductService productService) {
         this.cartItemRepository = cartItemRepository;
+        this.cartService = cartService;
+        this.productService = productService;
     }
 
     @Override
@@ -28,23 +35,25 @@ public class CartItemServiceImpl implements CartItemService {
 
     @Override
     public CartItem findById(Long id) {
-        Optional<CartItem> cartItem = cartItemRepository.findById(id);
-//        CartItem cartItem = null;
-//        if (optional.isPresent()) {
-//            cartItem = optional.get();
-//        } else throw new RuntimeException("Cart Item not found for id: " + id);
-//        return cartItem;
-        return cartItem.orElseThrow(() -> new CartItemNotFoundException(id));
+        return cartItemRepository.findById(id).orElseThrow(() -> new CartItemNotFoundException(id));
     }
 
     @Override
     public void delete(Long id) {
-        cartItemRepository.deleteById(id);
+        CartItem cartItem = findById(id);
+        if (cartItem != null) {
+            cartItemRepository.delete(cartItem);
+        }
     }
 
     @Override
     public CartItem findByCartIdAndProductId(Long cartId, Long productId) {
-        return cartItemRepository.findByCartIdAndProductId(cartId, productId);
+        Cart cart = cartService.findById(cartId);
+        Product product = productService.findById(productId);
+        if (cart != null && product != null) {
+            return cartItemRepository.findByCartIdAndProductId(cartId, productId);
+        }
+        throw new CartItemNotFoundException(cartId, productId);
     }
 
 
