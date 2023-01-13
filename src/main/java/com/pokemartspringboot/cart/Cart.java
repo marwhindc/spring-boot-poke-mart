@@ -84,6 +84,10 @@ public class Cart {
         this.checkedOut = true;
     }
 
+    public void setCheckedOut(boolean checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
