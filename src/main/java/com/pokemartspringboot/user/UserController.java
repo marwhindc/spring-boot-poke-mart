@@ -1,8 +1,10 @@
 package com.pokemartspringboot.user;
 
+import com.pokemartspringboot.cart.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,10 +15,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final CartService cartService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, CartService cartService) {
         this.userService = userService;
+        this.cartService = cartService;
     }
 
     @GetMapping
@@ -48,4 +52,10 @@ public class UserController {
     }
 
     //update user might not be needed for now
+
+    @GetMapping("/loggedin")
+    public ResponseEntity<User> getLoggedInUser(@AuthenticationPrincipal User user) {
+        User loggedInUser = userService.findById(user.getId());
+        return ResponseEntity.ok(loggedInUser);
+    }
 }

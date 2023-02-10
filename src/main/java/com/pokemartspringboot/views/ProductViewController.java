@@ -8,11 +8,12 @@ import com.pokemartspringboot.product.ProductService;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @ControllerAdvice
@@ -28,11 +29,11 @@ public class ProductViewController {
     @Autowired
     private CartItemService cartItemService;
 
-    @ModelAttribute("user")
-    public User user() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return userService.findByUserName(auth.getName());
-    }
+//    @ModelAttribute("user")
+//    public User user() {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        return userService.findByUserName(auth.getName());
+//    }
 
     @GetMapping
     public String viewProductPage(Model model) {

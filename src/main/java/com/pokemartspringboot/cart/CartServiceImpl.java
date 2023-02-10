@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -26,6 +25,7 @@ public class CartServiceImpl implements CartService {
         return cartRepository.findAll();
     }
 
+    //TODO: should not be able to create cart when it has an ID assigned (IDs are auto-generated)
     @Override
     public Cart save(Cart cart) {
         return cartRepository.save(cart);
