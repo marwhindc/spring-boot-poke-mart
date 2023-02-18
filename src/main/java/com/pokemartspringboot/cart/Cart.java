@@ -1,15 +1,18 @@
 package com.pokemartspringboot.cart;
 
 import com.pokemartspringboot.cartitem.CartItem;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 
 @Entity
 @Table(name = "carts")
+@Data
+@NoArgsConstructor
 public class Cart {
 
     @Id
@@ -24,9 +27,6 @@ public class Cart {
     @Column(name = "checked_out")
     private boolean checkedOut = false;
 
-    public Cart() {
-    }
-
     public Cart(Long userId) {
         this.userId = userId;
     }
@@ -34,30 +34,6 @@ public class Cart {
     public Cart(Long id, Long userId) {
         this.id = id;
         this.userId = userId;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Collection<CartItem> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(Collection<CartItem> cartItems) {
-        this.cartItems = cartItems;
     }
 
     public Integer getTotalQuantity() {
@@ -76,38 +52,7 @@ public class Cart {
         return total;
     }
 
-    public boolean isCheckedOut() {
-        return checkedOut;
-    }
-
     public void checkOut() {
         this.checkedOut = true;
-    }
-
-    public void setCheckedOut(boolean checkedOut) {
-        this.checkedOut = checkedOut;
-    }
-
-    @Override
-    public String toString() {
-        return "Cart{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", cartItems=" + cartItems +
-                ", checkedOut=" + checkedOut +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Cart cart = (Cart) o;
-        return checkedOut == cart.checkedOut && id.equals(cart.id) && userId.equals(cart.userId) && Objects.equals(cartItems, cart.cartItems);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userId, cartItems, checkedOut);
     }
 }

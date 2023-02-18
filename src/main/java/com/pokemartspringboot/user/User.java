@@ -1,6 +1,8 @@
 package com.pokemartspringboot.user;
 
 import com.pokemartspringboot.cart.Cart;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,10 +13,11 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 @Table(name = "users")
+@Data
+@NoArgsConstructor
 public class User implements UserDetails {
 
     @Id
@@ -40,9 +43,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "user_id")
     private Collection<Cart> carts = new HashSet<>();
 
-    public User() {
-    }
-
     //For testing
     public User(Long id, String username, String firstName, String lastName) {
         this.id = id;
@@ -56,15 +56,6 @@ public class User implements UserDetails {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
     @Override
@@ -87,77 +78,12 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Collection<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setCarts(Collection<Cart> carts) {
-        this.carts = carts;
-    }
-
     public Integer getSize() {
         return this.carts.size();
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("USER"));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", carts=" + carts +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) && username.equals(user.username) && firstName.equals(user.firstName) && lastName.equals(user.lastName) && password.equals(user.password) && Objects.equals(carts, user.carts);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, username, firstName, lastName, password, carts);
     }
 }
