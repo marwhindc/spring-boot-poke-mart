@@ -1,5 +1,7 @@
-package com.pokemartspringboot;
+package com.pokemartspringboot.auth;
 
+import com.pokemartspringboot.AuthCredentialRequest;
+import com.pokemartspringboot.JwtUtil;
 import com.pokemartspringboot.cart.Cart;
 import com.pokemartspringboot.cart.CartService;
 import com.pokemartspringboot.user.User;
@@ -17,6 +19,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:5000/"})
+//@CrossOrigin(origins = "http://localhost:63765/")
 @RequestMapping("/api/auth")
 public class LoginController {
 
@@ -89,3 +93,4 @@ public class LoginController {
                 .body(createdUser);
     }
 }
+
