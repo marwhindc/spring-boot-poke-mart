@@ -11,16 +11,19 @@ This is an ongoing project created to apply the knowledge and tools I've learned
 	- Spring Security 
 	- ORM (SQL and Hibernate)
 - Frontend
-	- Thymeleaf
+	- ~~Thymeleaf~~
 	- HTML & CSS
+    - React (https://github.com/marwhindc/poke-mart-react)
 - Testing
 	- JUnit
 	- Mockito
+- Others
+  - OpenAPI
 
 ## What I would like to use in the future:
-- React (frontend)
 - Docker
 - AWS
+- Kubernetes
 
 ![Current product page](/screenshots/product-page.png "Current product page")
 
