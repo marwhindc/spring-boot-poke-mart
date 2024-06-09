@@ -34,7 +34,9 @@ public class CartViewController {
         Cart cart = cartService.findById(id);
         cart.checkOut();
         cartService.save(cart);
-        Cart newCart = new Cart(user.getId());
+        Cart newCart = Cart.builder()
+                .userId(user.getId())
+                .build();
         cartService.save(newCart);
         return "redirect:/carts";
     }

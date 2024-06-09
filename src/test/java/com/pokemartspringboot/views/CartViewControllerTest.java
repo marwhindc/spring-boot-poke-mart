@@ -57,15 +57,26 @@ class CartViewControllerTest {
 
     @BeforeEach
     public void init() {
-        user = new User(1L, "aketchum", "Ash", "Ketchum");
-        cart = new Cart(1L, user.getId());
+        user = User.builder()
+                .id(1L)
+                .username("aketchum")
+                .firstName("Ash")
+                .lastName("Ketchum")
+                .build();
+        cart = Cart.builder()
+                .id(1L)
+                .userId(user.getId())
+                .build();
         product = new Product(1L, "Poke Ball", "Poke Ball", new BigDecimal(200), "http://test.com");
         product2 = new Product(2L, "Great Ball", "Great Ball", new BigDecimal(600), "http://test.com");
         cartItem = new CartItem(1L, 1L, 1, product);
         cartItem2 = new CartItem(2L, 2L, 1, product2);
         cart.getCartItems().add(cartItem);
 
-        checkedOutCart = new Cart(2L, user.getId());
+        checkedOutCart = Cart.builder()
+                .id(2L)
+                .userId(user.getId())
+                .build();
         checkedOutCart.getCartItems().add(cartItem2);
         checkedOutCart.checkOut();
 
@@ -112,7 +123,9 @@ class CartViewControllerTest {
     @Test
     @WithMockUser(roles = {"USER"})
     public void checkOut() throws Exception {
-        Cart newCart = new Cart(user.getId());
+        Cart newCart = Cart.builder()
+                .userId(user.getId())
+                .build();
 
         given(cartService.findById(1L)).willReturn(cart);
 

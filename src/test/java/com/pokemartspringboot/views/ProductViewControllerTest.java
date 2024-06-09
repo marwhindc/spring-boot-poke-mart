@@ -54,8 +54,16 @@ class ProductViewControllerTest {
 
     @BeforeEach
     public void init() {
-        user = new User(1L, "aketchum", "Ash", "Ketchum");
-        cart = new Cart(1L, user.getId());
+        user = User.builder()
+                .id(1L)
+                .username("aketchum")
+                .firstName("Ash")
+                .lastName("Ketchum")
+                .build();
+        cart = Cart.builder()
+                .id(1L)
+                .userId(1L)
+                .build();
         product = new Product(1L, "Poke Ball", "Poke Ball", new BigDecimal(200), "http://test.com");
         product2 = new Product(2L, "Great Ball", "Great Ball", new BigDecimal(600), "http://test.com");
         cartItem = new CartItem(1L, 1L, 1, product);

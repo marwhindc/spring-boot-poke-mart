@@ -21,7 +21,10 @@ class CartTest {
 
     @BeforeEach
     public void init() {
-        cart = new Cart(1L, 1L);
+        cart = Cart.builder()
+                .id(1L)
+                .userId(1L)
+                .build();
         cartItem = new CartItem(1L, 1L, 5, new Product(1L, "", "", BigDecimal.valueOf(200), ""));
         cartItem2 = new CartItem(2L, 1L, 2, new Product(1L, "", "", BigDecimal.valueOf(600), ""));
         cartItem3 = new CartItem(3L, 1L, 10, new Product(1L, "", "", BigDecimal.valueOf(1000), ""));

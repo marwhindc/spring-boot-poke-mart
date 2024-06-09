@@ -8,7 +8,6 @@ import com.pokemartspringboot.product.ProductService;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -61,7 +60,11 @@ public class ProductViewController {
             return "redirect:/products";
         }
 
-        CartItem newCartItem = new CartItem(activeCart.getId(), 1, productService.findById(id));
+        CartItem newCartItem = CartItem.builder()
+                .cartId(activeCart.getId())
+                .quantity(1)
+                .product(productService.findById(id))
+                .build();
         cartItemService.save(newCartItem);
         return "redirect:/products";
     }

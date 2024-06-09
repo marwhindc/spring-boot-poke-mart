@@ -1,6 +1,8 @@
 package com.pokemartspringboot.cart;
 
 import com.pokemartspringboot.cartitem.CartItem;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,28 +15,26 @@ import java.util.HashSet;
 @Table(name = "carts")
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cart_id")
     private Long id;
+
     @Column(name = "user_id")
     private Long userId;
+
     @OneToMany
     @JoinColumn(name = "cart_id")
+    @Builder.Default
     private Collection<CartItem> cartItems = new HashSet<>();
+
     @Column(name = "checked_out")
+    @Builder.Default
     private boolean checkedOut = false;
-
-    public Cart(Long userId) {
-        this.userId = userId;
-    }
-
-    public Cart(Long id, Long userId) {
-        this.id = id;
-        this.userId = userId;
-    }
 
     public Integer getTotalQuantity() {
         int total = 0;
