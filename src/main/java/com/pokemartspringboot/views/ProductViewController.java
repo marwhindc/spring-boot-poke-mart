@@ -7,6 +7,7 @@ import com.pokemartspringboot.cartitem.CartItemService;
 import com.pokemartspringboot.product.ProductService;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,15 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @ControllerAdvice
 @RequestMapping("/products")
+@AllArgsConstructor
 public class ProductViewController {
 
-    @Autowired
     private ProductService productService;
-    @Autowired
     private CartService cartService;
-    @Autowired
     private UserService userService;
-    @Autowired
     private CartItemService cartItemService;
 
 //    @ModelAttribute("user")

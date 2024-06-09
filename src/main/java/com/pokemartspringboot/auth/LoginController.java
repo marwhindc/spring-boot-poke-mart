@@ -7,7 +7,7 @@ import com.pokemartspringboot.cart.CartService;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserService;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,15 +22,12 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:5000/"})
 //@CrossOrigin(origins = "http://localhost:63765/")
 @RequestMapping("/api/auth")
+@AllArgsConstructor
 public class LoginController {
 
-    @Autowired
     private AuthenticationManager authenticationManager;
-    @Autowired
     private JwtUtil jwtUtil;
-    @Autowired
     private UserService userService;
-    @Autowired
     private CartService cartService;
 
     @PostMapping("/login")

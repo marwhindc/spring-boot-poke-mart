@@ -1,7 +1,7 @@
 package com.pokemartspringboot.user;
 
 import com.pokemartspringboot.cart.CartService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -13,16 +13,11 @@ import java.util.List;
 //@CrossOrigin(origins = "http://localhost:63765/")
 @RestController
 @RequestMapping("/api/users")
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
     private final CartService cartService;
-
-    @Autowired
-    public UserController(UserService userService, CartService cartService) {
-        this.userService = userService;
-        this.cartService = cartService;
-    }
 
     @GetMapping
     public ResponseEntity<List<User>> getUsers() {

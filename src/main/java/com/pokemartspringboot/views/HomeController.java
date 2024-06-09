@@ -2,6 +2,7 @@ package com.pokemartspringboot.views;
 
 import com.pokemartspringboot.reports.ReportService;
 import com.pokemartspringboot.user.UserService;
+import lombok.AllArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,11 +14,10 @@ import java.io.FileNotFoundException;
 //@Controller
 @RestController
 @RequestMapping("/users")
+@AllArgsConstructor
 public class HomeController {
 
-    @Autowired
     UserService userService;
-    @Autowired
     ReportService reportService;
 
 //    @GetMapping

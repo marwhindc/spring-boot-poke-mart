@@ -3,7 +3,7 @@ package com.pokemartspringboot.services;
 import com.pokemartspringboot.product.Product;
 import com.pokemartspringboot.product.ProductNotFoundException;
 import com.pokemartspringboot.product.ProductRepository;
-import com.pokemartspringboot.product.ProductServiceImpl;
+import com.pokemartspringboot.product.ProductService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -32,7 +32,7 @@ import static org.mockito.Mockito.when;
 public class ProductServiceTest {
 
     @InjectMocks
-    private ProductServiceImpl productService;
+    private ProductService productService;
     @Mock
     private ProductRepository productRepository;
 

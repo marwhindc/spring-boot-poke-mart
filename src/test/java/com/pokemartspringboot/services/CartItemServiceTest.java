@@ -5,7 +5,7 @@ import com.pokemartspringboot.cart.CartService;
 import com.pokemartspringboot.cartitem.CartItem;
 import com.pokemartspringboot.cartitem.CartItemNotFoundException;
 import com.pokemartspringboot.cartitem.CartItemRepository;
-import com.pokemartspringboot.cartitem.CartItemServiceImpl;
+import com.pokemartspringboot.cartitem.CartItemService;
 import com.pokemartspringboot.product.Product;
 import com.pokemartspringboot.product.ProductService;
 import org.junit.jupiter.api.Test;
@@ -20,23 +20,17 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CartItemServiceTest {
 
     @InjectMocks
-    private CartItemServiceImpl cartItemService;
+    private CartItemService cartItemService;
     @Mock
     private CartItemRepository cartItemRepository;
     @Mock

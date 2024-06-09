@@ -1,7 +1,7 @@
 package com.pokemartspringboot.cartitem;
 
 import com.pokemartspringboot.cart.Cart;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +12,10 @@ import java.util.List;
 //@CrossOrigin(origins = "http://localhost:63765/")
 @RestController
 @RequestMapping("/api/cart-items")
+@AllArgsConstructor
 public class CartItemController {
 
     private final CartItemService cartItemService;
-
-    @Autowired
-    public CartItemController(CartItemService cartItemService) {
-        this.cartItemService = cartItemService;
-    }
 
     @GetMapping
     public ResponseEntity<List<CartItem>> getCartItems() {

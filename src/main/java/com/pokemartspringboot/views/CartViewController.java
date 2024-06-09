@@ -5,7 +5,7 @@ import com.pokemartspringboot.cart.CartService;
 import com.pokemartspringboot.cartitem.CartItem;
 import com.pokemartspringboot.cartitem.CartItemService;
 import com.pokemartspringboot.user.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/carts")
+@AllArgsConstructor
 public class CartViewController {
 
-    @Autowired
     private CartService cartService;
-    @Autowired
     private CartItemService cartItemService;
 
     @GetMapping

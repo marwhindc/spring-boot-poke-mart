@@ -3,7 +3,7 @@ package com.pokemartspringboot.services;
 import com.pokemartspringboot.user.User;
 import com.pokemartspringboot.user.UserNotFoundException;
 import com.pokemartspringboot.user.UserRepository;
-import com.pokemartspringboot.user.UserServiceImpl;
+import com.pokemartspringboot.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 public class UserServiceTest {
 
     @InjectMocks
-    private UserServiceImpl userService;
+    private UserService userService;
     @Mock
     private UserRepository userRepository;
 
