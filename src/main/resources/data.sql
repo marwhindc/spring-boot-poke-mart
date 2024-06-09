@@ -1,11 +1,11 @@
 -- user table
-INSERT INTO users (user_id, user_name, first_name, last_name, password)
+INSERT INTO users (id, username, "firstName", "lastName", password)
 VALUES
     (1, 'aketchum', 'Ash', 'Ketchum', '$2y$10$k2P4yj2/y1aLx.5IRc5AH.XQRDkS0aKkGN2dUetIFEietFTRVrvVi'),
 	(2, 'mwilliams', 'Misty', 'Williams', '$2y$10$k2P4yj2/y1aLx.5IRc5AH.XQRDkS0aKkGN2dUetIFEietFTRVrvVi');
 
 -- products table
-INSERT INTO products (product_id, product_name, product_description, product_price, image_url)
+INSERT INTO product (id, name, description, price, "imageUrl")
 VALUES
     (1, 'Poke Ball', 'The PokéBall is the standard PokéBall you can obtain. It has a 1x Capture rate that doesn''t increase the chances of capturing a Pokémon.', 200, 'https://archives.bulbagarden.net/media/upload/7/79/Dream_Poké_Ball_Sprite.png'),
     (2, 'Great Ball', 'The Great Ball is a standard PokéBall you can obtain. It has a 1.5x Capture rate that increases the likelihood of capturing a Pokémon.', 600, 'https://archives.bulbagarden.net/media/upload/b/bf/Dream_Great_Ball_Sprite.png'),
@@ -15,13 +15,13 @@ VALUES
     (6, 'Ultra Ball', 'The Ultra Ball is a standard PokéBall you can obtain. It has a 2x Capture rate that increases the likelihood of capturing a Pokémon.', 1200, 'https://archives.bulbagarden.net/media/upload/a/a8/Dream_Ultra_Ball_Sprite.png');
 
 -- carts table (temp data)
-INSERT INTO carts (cart_id, user_id, checked_out)
+INSERT INTO cart (id, "userId", "checkedOut")
 VALUES
     (1, 1, false),
     (2, 2, false);
 
 --cart_items table (temp data)
-INSERT INTO cart_items (cart_item_id, cart_id, product_id, quantity)
+INSERT INTO "cartItem" (id, "cartId", "productId", quantity)
 VALUES
     (1, 1, 1, 5),
 	(2, 1, 2, 2),

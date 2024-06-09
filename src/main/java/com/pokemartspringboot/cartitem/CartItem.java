@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "cart_items")
+@Table(name = "cartItem")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,16 +19,15 @@ public class CartItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_item_id")
     private Long id;
 
-    @Column(name = "cart_id")
+    @Column(name = "cartId")
     private Long cartId;
 
     private Integer quantity;
 
     @OneToOne
-    @JoinColumn(name = "product_id")
+    @JoinColumn(name = "productId")
     private Product product;
 
     public BigDecimal getTotalPrice() {

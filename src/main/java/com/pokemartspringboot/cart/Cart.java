@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.HashSet;
 
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,18 +21,17 @@ public class Cart {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "cart_id")
     private Long id;
 
-    @Column(name = "user_id")
+    @Column(name = "userId")
     private Long userId;
 
     @OneToMany
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cartId")
     @Builder.Default
     private Collection<CartItem> cartItems = new HashSet<>();
 
-    @Column(name = "checked_out")
+    @Column(name = "checkedOut")
     @Builder.Default
     private boolean checkedOut = false;
 

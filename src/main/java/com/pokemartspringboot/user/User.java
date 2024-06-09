@@ -27,22 +27,22 @@ public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
 
     @NotBlank(message = "Username is required")
     @Size(min = 6, max = 20, message = "Username must be between 6 and 20 characters")
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String username;
 
     @NotBlank(message = "First name is required")
     @Size(min = 2, max = 50, message = "First name must be between 2 and 50 characters")
-    @Column(name = "first_name")
+    @Column(name = "firstName")
     private String firstName;
 
     @NotBlank(message = "Last name is required")
     @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
-    @Column(name = "last_name")
+    @Column(name = "lastName")
     private String lastName;
 
 //    @NotBlank(message = "Password is required")
@@ -50,7 +50,7 @@ public class User implements UserDetails {
     private String password;
 
     @OneToMany
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "userId")
     @JsonIgnore
     @Builder.Default
     private Collection<Cart> carts = new HashSet<>();

@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,18 +18,14 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
     private Long id;
 
-    @Column(name = "product_name")
     private String name;
 
-    @Column(name = "product_description")
     private String description;
 
-    @Column(name = "product_price")
     private BigDecimal price;
 
-    @Column(name = "image_url")
+    @Column(name = "imageUrl")
     private String imageUrl;
 }
