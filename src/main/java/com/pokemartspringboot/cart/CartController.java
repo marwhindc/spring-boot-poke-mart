@@ -1,6 +1,7 @@
 package com.pokemartspringboot.cart;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:5000/"})
 //@CrossOrigin(origins = "http://localhost:63765/")
@@ -30,7 +31,7 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cart> getCartById(@PathVariable("id") Long id){
+    public ResponseEntity<Cart> getCartById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(cartService.findById(id));
     }
 
@@ -41,7 +42,10 @@ public class CartController {
     }
 
     @GetMapping("/user/{id}/{isCheckedOut}")
-    public ResponseEntity<List<Cart>> getCartByUserIdAndCheckedOut(@PathVariable("id") Long id, @PathVariable("isCheckedOut") boolean isCheckedOut) {
+    public ResponseEntity<List<Cart>> getCartByUserIdAndCheckedOut(
+        @PathVariable("id") Long id,
+        @PathVariable("isCheckedOut") boolean isCheckedOut
+    ) {
         return ResponseEntity.ok(cartService.findByUserIdAndCheckedOut(id, isCheckedOut));
     }
 

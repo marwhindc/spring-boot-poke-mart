@@ -1,14 +1,15 @@
 package com.pokemartspringboot.user;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -19,8 +20,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //        List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
-//        return buildUserForAuthentication(user, authorities);
+        //List<GrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("USER"));
+        //return buildUserForAuthentication(user, authorities);
         return userService.findByUserName(username);
     }
 

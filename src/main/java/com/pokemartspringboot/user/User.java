@@ -1,14 +1,8 @@
 package com.pokemartspringboot.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.pokemartspringboot.cart.Cart;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +14,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import com.pokemartspringboot.cart.Cart;
 
 @Entity
 @Table(name = "users")
@@ -52,8 +55,9 @@ public class User implements UserDetails {
     @Column(name = "lastName")
     private String lastName;
 
-//    @NotBlank(message = "Password is required")
-//    @Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters") //encryption messes up validation need to have UserDTO
+    //@NotBlank(message = "Password is required")
+    //@Size(min = 8, max = 16, message = "Password must be between 8 and 16 characters")
+    //encryption messes up validation need to have UserDTO
     private String password;
 
     @OneToMany

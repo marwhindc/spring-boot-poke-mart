@@ -1,10 +1,8 @@
 package com.pokemartspringboot.cart;
 
-import com.pokemartspringboot.cartitem.CartItem;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +12,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.HashSet;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import com.pokemartspringboot.cartitem.CartItem;
 
 @Entity
 @Table(name = "cart")
@@ -52,7 +54,7 @@ public class Cart {
 
     public BigDecimal getTotalCartPrice() {
         BigDecimal total = BigDecimal.ZERO;
-        for (CartItem cartItem : cartItems){
+        for (CartItem cartItem : cartItems) {
             total = total.add(cartItem.getTotalPrice());
         }
         return total;

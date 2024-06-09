@@ -1,7 +1,7 @@
 package com.pokemartspringboot.cartitem;
 
-import com.pokemartspringboot.cart.Cart;
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
+
+import com.pokemartspringboot.cart.Cart;
 
 @CrossOrigin(origins = {"http://localhost:3000/", "http://localhost:5000/"})
 //@CrossOrigin(origins = "http://localhost:63765/")
@@ -36,7 +38,10 @@ public class CartItemController {
     }
 
     @GetMapping("/cart/{cartId}/product/{productId}")
-    public ResponseEntity<CartItem> getCartItemByCartIdAndProductId(@PathVariable("cartId") Long cartId, @PathVariable("productId") Long productId) {
+    public ResponseEntity<CartItem> getCartItemByCartIdAndProductId(
+        @PathVariable("cartId") Long cartId,
+        @PathVariable("productId") Long productId
+    ) {
         return ResponseEntity.ok(cartItemService.findByCartIdAndProductId(cartId, productId));
     }
 

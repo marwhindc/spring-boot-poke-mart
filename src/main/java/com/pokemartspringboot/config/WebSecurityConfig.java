@@ -1,7 +1,7 @@
 package com.pokemartspringboot.config;
 
-import com.pokemartspringboot.JwtFilter;
-import com.pokemartspringboot.user.UserDetailsServiceImpl;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,12 +15,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import javax.servlet.http.HttpServletResponse;
+import com.pokemartspringboot.JwtFilter;
+import com.pokemartspringboot.user.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
 
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
@@ -28,8 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtFilter jwtFilter;
 
     @Bean
-    public PasswordEncoder passwordEncoder()
-    {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -55,16 +54,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
             .exceptionHandling()
             .authenticationEntryPoint((request, response, ex) -> {
-                    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
-                })
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, ex.getMessage());
+            })
                 .and()
             .authorizeRequests()
             .antMatchers(
-//                        HttpMethod.OPTIONS,
-//        "/registration**",
-//                        "/js/**",
-//                        "/css/**",
-//                        "/img/**",
+                        //HttpMethod.OPTIONS,
+                        //"/registration**",
+                        //"/js/**",
+                        //"/css/**",
+                        //"/img/**",
                         "/api/auth/**", "/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui/**")
                 .permitAll()
                 .anyRequest().authenticated()

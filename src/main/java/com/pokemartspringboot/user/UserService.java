@@ -1,10 +1,11 @@
 package com.pokemartspringboot.user;
 
-import lombok.AllArgsConstructor;
+import java.util.List;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.AllArgsConstructor;
 
 @Service
 @AllArgsConstructor
@@ -34,10 +35,10 @@ public class UserService {
 
     public User findByUserName(String username) {
         //not working with MyUserDetailsService
-//        User user = userRepository.findByUsername(username);
-//        if (user != null) {
-//            return user;
-//        } else throw new UserNotFoundException(username);
+        //User user = userRepository.findByUsername(username);
+        //if (user != null) {
+        //    return user;
+        //} else throw new UserNotFoundException(username);
         return userRepository.findByUsername(username);
     }
 }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class CartItemNotFoundException extends RuntimeException{
+public class CartItemNotFoundException extends RuntimeException {
 
     public CartItemNotFoundException(Long id) {
         super("Unable to find cart item with id: " + id);
